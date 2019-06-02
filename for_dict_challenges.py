@@ -9,7 +9,11 @@ students = [
 ]	
 for name in students:
     print(name['first_name']+':',students.count(name))
+    # лучше через format строки
     students.remove(name)
+    # редактировать переменные по которым ты итерируешься, внутри цикла - плохая идея, лучше так никогда не делать
+    # чтобы имена в выаоде не поаторялись, можно итерироваться по уникальным именам сразу, например
+
 # Пример вывода:
 # Вася: 1
 # Маша: 2
@@ -28,10 +32,12 @@ students = [
 count = 0
 name = ""
 for i in students:
+    #  i обычно назывтют переменные являюзиеся айдишниками, то есть числами, просто конвенция
+    # предлагаю for student in students, тогда название перееменной отражает то, тчо у нее внутри
     if students.count(i) > count:
         count = students.count(i)
         name = i['first_name']
-print("Самое частое имя среди учеников:", name)
+print("Самое частое имя среди учеников: ", name)
 
 # Пример вывода:
 # Самое частое имя среди учеников: Маша
@@ -54,6 +60,7 @@ class_2 = school_students[1]
 count1 = 0
 count2 = 0 
 for i in class_1:
+    #  коммент про i см выше
     if class_1.count(i) > count1:
         count1 = class_1.count(i)
         name1 = i['first_name']
@@ -66,6 +73,8 @@ for i in class_2:
 
 print("Самое частое имя в классе 1:",name1)
 print("Самое частое имя в классе 2:",name2)
+# тут ты сталкиваешься с дублированием кода, лучше сделать одну функцию get_most_common_name(class)
+# и потом циклом по списку классов ее запускать
 
 # Пример вывода:
 # Самое частое имя в классе 1: Вася
@@ -89,8 +98,10 @@ for clas in school:
     m = 0
     for student in clas['students']:
         if is_male[student['first_name']] == True:
+	# у тебя is_male[student['first_name']] ужк принимает занчение true\false, то есть дополнательное сравнение не нужно
 	          m += 1
     print("В классе",clas['class'],(len(clas['students'])-m),"девочки и",m,"мальчика")
+    # тут точно через foramt строки надо, не читабельно иначе
 
 # Пример вывода:
 # В классе 2a 2 девочки и 0 мальчика.
@@ -117,11 +128,16 @@ for clas in school:
     for student in clas['students']:
         if is_male[student['first_name']] == True:
 	          m += 1
+	          # тут что-то с отступами 
     w = len(clas['students'])-m
     if m > w:
         mclass = clas['class']
     else:
         wclass = clas['class'] 
+# а если классов больше 2х? сработает ли твой код корректно? например, можно добвить эти два класса к списку
+# [{'first_name': 'Маша'}, {'first_name': 'Оля'}, {'first_name': 'Оля'}]
+# [{'first_name': 'Маша'}, {'first_name': 'Оля'}, {'first_name': 'Маша'}, {'first_name': 'Оля'}]
+#
 print("Больше всего мальчиков в классе:",mclass)
 print("Больше всего девочек в классе:",wclass)
 # Пример вывода:
